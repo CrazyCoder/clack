@@ -20,7 +20,11 @@ export function isCancel(value: unknown): value is typeof CANCEL_SYMBOL {
 
 export function setRawMode(input: Readable, value: boolean) {
 	const i = input as typeof stdin;
-
+	// Skip setRawMode(false) on Windows — toggling to cooked mode triggers a
+	// blocking ReadConsole() in libuv that races with the next prompt's
+	// ReadConsoleInput(), freezing input until Enter is pressed.
+	// See: libuv/libuv#852, nodejs/node#49588, bombshell-dev/clack#76
+	if (!value && isWindows) return;
 	if (i.isTTY) i.setRawMode(value);
 }
 

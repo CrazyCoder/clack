@@ -295,6 +295,10 @@ export default class Prompt<TValue> {
 		this.input.removeListener('keypress', this.onKeypress);
 		this.output.write('\n');
 		setRawMode(this.input, false);
+		// Prevent rl.close() from calling input.setRawMode(false) internally —
+		// on Windows this triggers a blocking ReadConsole() in libuv.
+		// See: nodejs/node#31762, libuv/libuv#852
+		if (this.rl) this.rl.terminal = false;
 		this.rl?.close();
 		this.rl = undefined;
 		this.emit(`${this.state}`, this.value);
