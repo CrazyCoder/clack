@@ -28,6 +28,16 @@ The `block()` function already had both guards (`!isWindows` check + `rl.termina
 
 **Consumer note:** Since `setRawMode(false)` is never called between prompts on Windows, consumers must explicitly call `process.stdin.setRawMode(false)` when their prompt session is fully complete (before returning control to a non-raw-mode caller or exiting).
 
+### Windows Terminal default-terminal delegation Unicode fix
+
+**Files:** `packages/prompts/src/common.ts`
+
+**Problem:** On Windows 11, running a clack app from cmd.exe / PowerShell launched outside the Windows Terminal app (Start menu, Run dialog, shortcuts) renders the ASCII symbol fallback (`T`, `|`, `o`, `*`) even though the window is drawn by Windows Terminal, which renders `┌ │ ◆ ◇` fine.
+
+**Root cause:** With Windows Terminal as the OS default terminal, the shell process spawns first and WT attaches to it afterwards, so `WT_SESSION` / `TERM_PROGRAM` never appear in the environment ([microsoft/terminal#13006](https://github.com/microsoft/terminal/issues/13006) — by design; Microsoft discourages env-based WT detection). `is-unicode-supported` checks only those env vars on win32, so it reports no Unicode support.
+
+**Fix:** `common.ts` wraps `is-unicode-supported` — when it returns false on win32, fall back to the OS build number: builds ≥ 14393 (Windows 10 1607) have VT-capable consoles with TrueType fonts that render these glyphs. Non-Windows behavior is unchanged.
+
 ## Building
 
 ```bash

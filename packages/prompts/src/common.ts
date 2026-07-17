@@ -1,9 +1,24 @@
+import { release } from 'node:os';
 import type { Readable, Writable } from 'node:stream';
 import { styleText } from 'node:util';
 import type { State } from '@clack/core';
 import isUnicodeSupported from 'is-unicode-supported';
 
-export const unicode = isUnicodeSupported();
+// is-unicode-supported detects Windows terminals purely from env vars
+// (WT_SESSION, TERM_PROGRAM, ...). Under Windows 11 default-terminal
+// delegation the shell spawns before Windows Terminal attaches, so none of
+// those vars exist in the process environment even though the renderer is
+// Windows Terminal (microsoft/terminal#13006). Fall back to the OS build:
+// consoles since Windows 10 1607 (build 14393) ship VT support and TrueType
+// fonts that render these glyphs fine.
+function isUnicodeSupportedWithDelegation(): boolean {
+	if (isUnicodeSupported()) return true;
+	if (process.platform !== 'win32') return false;
+	const build = Number(release().split('.')[2] ?? 0);
+	return build >= 14393;
+}
+
+export const unicode = isUnicodeSupportedWithDelegation();
 export const isCI = (): boolean => process.env.CI === 'true';
 export const isTTY = (output: Writable): boolean => {
 	return (output as Writable & { isTTY?: boolean }).isTTY === true;
