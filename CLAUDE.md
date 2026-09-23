@@ -38,14 +38,6 @@ The `block()` function already had both guards (`!isWindows` check + `rl.termina
 
 **Fix:** `common.ts` wraps `is-unicode-supported` — when it returns false on win32, fall back to the OS build number: builds ≥ 14393 (Windows 10 1607) have VT-capable consoles with TrueType fonts that render these glyphs. Non-Windows behavior is unchanged.
 
-### Multiselect cursor row in reverse video
-
-**Files:** `packages/prompts/src/multi-select.ts`, `packages/prompts/src/group-multi-select.ts`
-
-**Problem:** In `multiselect` and `groupMultiselect` the cursor row differs from its neighbours only by color: a cyan `◻` next to a dim `◻`, and a normal label next to dim labels. The selected rows keep the same green `◼` whether or not the cursor is on them. On themes where dim text is not lighter than normal text (light schemes in Windows Terminal, for example), the cursor row is hard or impossible to find.
-
-**Fix:** The label of the cursor row (states `active` and `active-selected`) is rendered in reverse video, one span per label line so `wrap-ansi` never inverts a row prefix. Reverse video uses the theme's own foreground and background, so it stands out on any scheme. Hints and checkbox glyphs are unchanged.
-
 ## Building
 
 ```bash
