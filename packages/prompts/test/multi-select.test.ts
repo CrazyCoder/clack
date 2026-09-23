@@ -43,6 +43,25 @@ describe.each(['true', 'false'])('multiselect (isCI = %s)', (isCI) => {
 		expect(output.buffer).toMatchSnapshot();
 	});
 
+	test('renders the cursor row label in reverse video, selected or not', async () => {
+		const result = prompts.multiselect({
+			message: 'foo',
+			options: [{ value: 'opt0' }, { value: 'opt1' }],
+			input,
+			output,
+		});
+
+		const first = output.buffer.join('');
+		input.emit('keypress', '', { name: 'space' });
+		const selected = output.buffer.join('').slice(first.length);
+		input.emit('keypress', '', { name: 'return' });
+		await result;
+
+		expect(first).toContain('\x1b[7mopt0\x1b[27m');
+		expect(first).not.toContain('\x1b[7mopt1');
+		expect(selected).toContain('\x1b[7mopt0\x1b[27m');
+	});
+
 	test('renders multiple selected options', async () => {
 		const result = prompts.multiselect({
 			message: 'foo',

@@ -50,6 +50,28 @@ describe.each(['true', 'false'])('groupMultiselect (isCI = %s)', (isCI) => {
 		expect(output.buffer).toMatchSnapshot();
 	});
 
+	test('renders the cursor row label in reverse video, selected or not', async () => {
+		const result = prompts.groupMultiselect({
+			message: 'foo',
+			input,
+			output,
+			options: {
+				group1: [{ value: 'group1value0' }, { value: 'group1value1' }],
+			},
+		});
+
+		input.emit('keypress', '', { name: 'down' });
+		const before = output.buffer.join('');
+		input.emit('keypress', '', { name: 'space' });
+		const selected = output.buffer.join('').slice(before.length);
+		input.emit('keypress', '', { name: 'return' });
+		await result;
+
+		expect(before).toContain('\x1b[7mgroup1value0\x1b[27m');
+		expect(before).not.toContain('\x1b[7mgroup1value1');
+		expect(selected).toContain('\x1b[7mgroup1value0\x1b[27m');
+	});
+
 	test('can select multiple options', async () => {
 		const result = prompts.groupMultiselect({
 			message: 'foo',

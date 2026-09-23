@@ -60,7 +60,7 @@ export const multiselect = <Value>(opts: MultiSelectOptions<Value>) => {
 			}`;
 		}
 		if (state === 'active') {
-			return `${styleText('cyan', S_CHECKBOX_ACTIVE)} ${label}${
+			return `${styleText('cyan', S_CHECKBOX_ACTIVE)} ${computeLabel(label, (text) => styleText('inverse', text))}${
 				option.hint ? ` ${styleText('dim', `(${option.hint})`)}` : ''
 			}`;
 		}
@@ -73,7 +73,7 @@ export const multiselect = <Value>(opts: MultiSelectOptions<Value>) => {
 			return `${computeLabel(label, (text) => styleText(['strikethrough', 'dim'], text))}`;
 		}
 		if (state === 'active-selected') {
-			return `${styleText('green', S_CHECKBOX_SELECTED)} ${label}${
+			return `${styleText('green', S_CHECKBOX_SELECTED)} ${computeLabel(label, (text) => styleText('inverse', text))}${
 				option.hint ? ` ${styleText('dim', `(${option.hint})`)}` : ''
 			}`;
 		}

@@ -112,6 +112,10 @@ export const groupMultiselect = <Value>(opts: GroupMultiSelectOptions<Value>) =>
 		options: (Option<Value> & { group: string | boolean })[] = []
 	) => {
 		const label = option.label ?? String(option.value);
+		const cursorLabel = label
+			.split('\n')
+			.map((line) => styleText('inverse', line))
+			.join('\n');
 		const isItem = typeof option.group === 'string';
 		const next = isItem && (options[options.indexOf(option) + 1] ?? { group: true });
 		const isLast = isItem && next && next.group === true;
@@ -133,7 +137,7 @@ export const groupMultiselect = <Value>(opts: GroupMultiSelectOptions<Value>) =>
 		if (state === 'active') {
 			return wrapTextWithPrefix(
 				opts.output,
-				`${label}${option.hint ? ` ${styleText('dim', `(${option.hint})`)}` : ''}`,
+				`${cursorLabel}${option.hint ? ` ${styleText('dim', `(${option.hint})`)}` : ''}`,
 				`${spacingPrefix}${styleText('dim', prefix)} `,
 				`${spacingPrefix}${styleText('dim', prefix)}${styleText('cyan', S_CHECKBOX_ACTIVE)} `,
 				`${spacingPrefix}${styleText('dim', prefixEnd)} `
@@ -177,7 +181,7 @@ export const groupMultiselect = <Value>(opts: GroupMultiSelectOptions<Value>) =>
 		if (state === 'active-selected') {
 			return wrapTextWithPrefix(
 				opts.output,
-				`${label}${option.hint ? ` ${styleText('dim', `(${option.hint})`)}` : ''}`,
+				`${cursorLabel}${option.hint ? ` ${styleText('dim', `(${option.hint})`)}` : ''}`,
 				`${spacingPrefix}${styleText('dim', prefix)} `,
 				`${spacingPrefix}${styleText('dim', prefix)}${styleText('green', S_CHECKBOX_SELECTED)} `,
 				`${spacingPrefix}${styleText('dim', prefixEnd)} `
