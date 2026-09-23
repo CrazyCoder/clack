@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL } from '@clack/core';
 import { GroupMultiSelectPrompt, settings, wrapTextWithPrefix } from '@clack/core';
 import {
@@ -14,6 +13,7 @@ import {
 import { limitOptions } from './limit-options.js';
 import { MULTISELECT_INSTRUCTIONS } from './multi-select.js';
 import type { Option } from './select.js';
+import { styleText } from './style-text.js';
 
 /**
  * Options for the {@link groupMultiselect} prompt.

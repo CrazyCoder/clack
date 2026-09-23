@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL } from '@clack/core';
 import { SelectPrompt, settings, wrapTextWithPrefix } from '@clack/core';
 import {
@@ -12,6 +11,7 @@ import {
 	symbolBar,
 } from './common.js';
 import { limitOptions } from './limit-options.js';
+import { styleText } from './style-text.js';
 
 export const SELECT_INSTRUCTIONS = [
 	`${styleText('dim', '↑/↓')} to navigate`,

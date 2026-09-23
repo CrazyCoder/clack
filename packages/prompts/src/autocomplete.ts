@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL, Validate } from '@clack/core';
 import { AutocompletePrompt, settings } from '@clack/core';
 import {
@@ -13,6 +12,7 @@ import {
 } from './common.js';
 import { limitOptions } from './limit-options.js';
 import type { Option } from './select.js';
+import { styleText } from './style-text.js';
 
 function getLabel<T>(option: Option<T>) {
 	return option.label ?? String(option.value ?? '');

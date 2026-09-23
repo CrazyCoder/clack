@@ -1,6 +1,7 @@
-import { stripVTControlCharacters as strip, styleText } from 'node:util';
+import { stripVTControlCharacters as strip } from 'node:util';
 import { S_BAR, S_ERROR, S_INFO, S_STEP_SUBMIT, S_SUCCESS, S_WARN } from './common.js';
 import type { LogMessageOptions } from './log.js';
+import { styleText } from './style-text.js';
 
 const prefix = `${styleText('gray', S_BAR)}  `;
 

@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL } from '@clack/core';
 import { ConfirmPrompt, settings, wrapTextWithPrefix } from '@clack/core';
 import {
@@ -9,6 +8,7 @@ import {
 	S_RADIO_INACTIVE,
 	symbol,
 } from './common.js';
+import { styleText } from './style-text.js';
 
 /**
  * Options for the {@link confirm} prompt.

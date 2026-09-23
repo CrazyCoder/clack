@@ -1,5 +1,4 @@
 import type { Writable } from 'node:stream';
-import { styleText } from 'node:util';
 import { getColumns } from '@clack/core';
 import { erase } from 'sisteransi';
 import {
@@ -10,6 +9,7 @@ import {
 	S_STEP_SUBMIT,
 } from './common.js';
 import { log } from './log.js';
+import { styleText } from './style-text.js';
 
 export interface TaskLogOptions extends CommonOptions {
 	title: string;

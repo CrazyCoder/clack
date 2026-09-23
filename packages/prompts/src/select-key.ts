@@ -1,8 +1,8 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL } from '@clack/core';
 import { SelectKeyPrompt, settings, wrapTextWithPrefix } from '@clack/core';
 import { type CommonOptions, S_BAR, S_BAR_END, symbol } from './common.js';
 import type { Option } from './select.js';
+import { styleText } from './style-text.js';
 
 export interface SelectKeyOptions<Value extends string> extends CommonOptions {
 	message: string;

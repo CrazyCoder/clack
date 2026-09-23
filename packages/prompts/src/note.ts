@@ -1,6 +1,5 @@
 import process from 'node:process';
 import type { Writable } from 'node:stream';
-import { styleText } from 'node:util';
 import { getColumns, settings } from '@clack/core';
 import stringWidth from 'fast-string-width';
 import { type Options as WrapAnsiOptions, wrapAnsi } from 'fast-wrap-ansi';
@@ -14,6 +13,7 @@ import {
 	S_CORNER_TOP_RIGHT,
 	S_STEP_SUBMIT,
 } from './common.js';
+import { styleText } from './style-text.js';
 
 type FormatFn = (line: string) => string;
 export interface NoteOptions extends CommonOptions {

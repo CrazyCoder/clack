@@ -1,7 +1,7 @@
-import { styleText } from 'node:util';
 import type { State } from '@clack/core';
 import { unicodeOr } from './common.js';
 import { type SpinnerOptions, type SpinnerResult, spinner } from './spinner.js';
+import { styleText } from './style-text.js';
 
 const S_PROGRESS_CHAR: Record<NonNullable<ProgressOptions['style']>, string> = {
 	light: unicodeOr('─', '-'),

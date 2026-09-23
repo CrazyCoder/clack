@@ -1,7 +1,7 @@
 import type { Writable } from 'node:stream';
-import { styleText } from 'node:util';
 import { settings } from '@clack/core';
 import { type CommonOptions, S_BAR, S_BAR_END, S_BAR_START } from './common.js';
+import { styleText } from './style-text.js';
 
 /**
  * The `cancel` function defines an interruption of an interaction

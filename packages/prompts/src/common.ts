@@ -1,8 +1,8 @@
 import { release } from 'node:os';
 import type { Readable, Writable } from 'node:stream';
-import { styleText } from 'node:util';
 import type { State } from '@clack/core';
 import isUnicodeSupported from 'is-unicode-supported';
+import { styleText } from './style-text.js';
 
 // is-unicode-supported detects Windows terminals purely from env vars
 // (WT_SESSION, TERM_PROGRAM, ...). Under Windows 11 default-terminal

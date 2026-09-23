@@ -1,7 +1,7 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL, Validate } from '@clack/core';
 import { settings, TextPrompt } from '@clack/core';
 import { type CommonOptions, S_BAR, S_BAR_END, symbol } from './common.js';
+import { styleText } from './style-text.js';
 
 /**
  * Options for the {@link text} prompt

@@ -1,7 +1,7 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL, DateFormat, State, Validate } from '@clack/core';
 import { DatePrompt, runValidation, settings } from '@clack/core';
 import { type CommonOptions, S_BAR, S_BAR_END, symbol } from './common.js';
+import { styleText } from './style-text.js';
 
 export type { DateFormat };
 

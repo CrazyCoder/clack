@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import { block, getColumns, settings } from '@clack/core';
 import { wrapAnsi } from 'fast-wrap-ansi';
 import { cursor, erase } from 'sisteransi';
@@ -11,6 +10,7 @@ import {
 	S_STEP_SUBMIT,
 	unicode,
 } from './common.js';
+import { styleText } from './style-text.js';
 
 export interface SpinnerOptions extends CommonOptions {
 	indicator?: 'dots' | 'timer';

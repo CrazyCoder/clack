@@ -1,7 +1,7 @@
-import { styleText } from 'node:util';
 import { getColumns, getRows } from '@clack/core';
 import { wrapAnsi } from 'fast-wrap-ansi';
 import type { CommonOptions } from './common.js';
+import { styleText } from './style-text.js';
 
 /**
  * Options for the {@link limitOptions} function.

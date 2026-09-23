@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import { settings } from '@clack/core';
 import {
 	type CommonOptions,
@@ -9,6 +8,7 @@ import {
 	S_SUCCESS,
 	S_WARN,
 } from './common.js';
+import { styleText } from './style-text.js';
 
 export interface LogMessageOptions extends CommonOptions {
 	symbol?: string;

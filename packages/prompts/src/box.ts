@@ -1,5 +1,4 @@
 import type { Writable } from 'node:stream';
-import { styleText } from 'node:util';
 import { getColumns, settings } from '@clack/core';
 import stringWidth from 'fast-string-width';
 import { wrapAnsi } from 'fast-wrap-ansi';
@@ -16,6 +15,7 @@ import {
 	S_CORNER_TOP_LEFT,
 	S_CORNER_TOP_RIGHT,
 } from './common.js';
+import { styleText } from './style-text.js';
 
 /**
  * Alignment for content or titles within the box.

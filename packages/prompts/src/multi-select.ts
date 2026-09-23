@@ -1,4 +1,3 @@
-import { styleText } from 'node:util';
 import type { CANCEL_SYMBOL } from '@clack/core';
 import { MultiSelectPrompt, settings, wrapTextWithPrefix } from '@clack/core';
 import {
@@ -14,6 +13,7 @@ import {
 } from './common.js';
 import { limitOptions } from './limit-options.js';
 import type { Option } from './select.js';
+import { styleText } from './style-text.js';
 
 export const MULTISELECT_INSTRUCTIONS = [
 	`${styleText('dim', '↑/↓')} to navigate`,
